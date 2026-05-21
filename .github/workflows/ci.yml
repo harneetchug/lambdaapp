@@ -1,0 +1,26 @@
+name: Build Lambda
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+
+      - name: Build JAR
+        run: mvn clean package
+
+      - name: Upload JAR to S3 artifact bucket
+        run: |
+          aws s3 cp target/lambdaapp-1.0-SNAPSHOT.jar \
+          s3://harneet-artifacts-12345/lambdaapp/app.jar
