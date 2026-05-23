@@ -1,17 +1,18 @@
 package com.example;
 
+import com.amazonaws.services.lambda.runtime.Context;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.amazonaws.services.lambda.runtime.events.SQSEvent;
 
-import org.apache.log4j.Logger;
+public class Handler implements RequestHandler<SQSEvent, Void> {
 
-import java.util.Map;
+    @Override
+    public Void handleRequest(SQSEvent event, Context context) {
 
-public class Handler {
+        for (SQSEvent.SQSMessage msg : event.getRecords()) {
+            System.out.println("Message: " + msg.getBody());
+        }
 
-    private Logger log;
-
-
-    public void handleRequest(Map<String, Object> event) {
-        log.info("S3 Event received:");
-        log.info(event);
+        return null;
     }
 }

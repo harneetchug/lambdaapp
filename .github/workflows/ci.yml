@@ -36,4 +36,4 @@ jobs:
       - name: Upload JAR to S3 artifact bucket
         run: |
           aws s3 cp target/lambdaapp-1.0-SNAPSHOT.jar \
-          s3://harneet-artifact-bucket/lambdaapp/lambdaapp-1.0.jar
+          s3://harneet-artifact-bucket/lambdaapp/lambdaapp-1.0.0.jar
